@@ -1,21 +1,23 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [BoltGlobalBehaviour]
 public class NetworkCallbacks : Bolt.GlobalEventListener
 {
-    //Positions optimized for "Room" scene
-    Vector3[] spawnPositions = {
-        new Vector3(-1f, 1f, -10f),
-        new Vector3(-1f, 1f, -10f),
-        new Vector3(-11f, 1f, -1f),
-        new Vector3(-11f, 1f, -10f),
-    };
+    public List<Transform> spawnPoints = new List<Transform>();
 
     //Called when scene is done loading locally
     public override void SceneLoadLocalDone(string scene)
     {
+        GameObject[] mapSpawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
+
+        for (int i = 0; i < mapSpawnPoints.Length; i++)
+        {
+            spawnPoints.Add(mapSpawnPoints[i].transform);
+        }
+
         //Position to spawn player at
-        Vector3 spawnPos = spawnPositions[Random.Range(0, 4)];
+        Vector3 spawnPos = spawnPoints[Random.Range(0, spawnPoints.Count)].position;
 
         //Spawning the player
         BoltNetwork.Instantiate(BoltPrefabs.Player, spawnPos, Quaternion.identity);
