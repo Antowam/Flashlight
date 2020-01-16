@@ -1,14 +1,28 @@
 ﻿using UnityEngine;
 
 
-[RequireComponent(typeof(Camera))]
+
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
+    public const string HorizontalInput = "Horizontal";
+    public const string VerticalInput = "Vertical";
+    
+
     Rigidbody rb;
 
 
-    public float speed = 1f;
+    public float moveSpeed = 5f;
+    public int batterySize = 100;
+
+
+
+    private float translationZ;
+    private float translationX;
+
+
+
+
 
 
 
@@ -19,6 +33,8 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        
+        translationZ = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
+        translationX = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+        transform.Translate(translationX, 0, translationZ);
     }
 }
