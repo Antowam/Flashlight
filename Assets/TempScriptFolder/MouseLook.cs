@@ -18,6 +18,8 @@ public class MouseLook : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = false;
+
         targetDirection = transform.localRotation.eulerAngles;
 
         if (characterBody)
