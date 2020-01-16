@@ -212,12 +212,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &636285021 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1383797031774224134, guid: e4bff17bde54cd241b05f922813a9b19,
-    type: 3}
-  m_PrefabInstance: {fileID: 1368790885}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &692583240
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,31 +305,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1267483276 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2562610036663101082, guid: e4bff17bde54cd241b05f922813a9b19,
-    type: 3}
-  m_PrefabInstance: {fileID: 1368790885}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1267483279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1267483276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df7204a26ab8bcb42b625af4a6e62d96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clampInDegrees: {x: 360, y: 180}
-  lockCursor: 0
-  sensitivity: {x: 2, y: 2}
-  smoothing: {x: 3, y: 3}
-  targetDirection: {x: 0, y: 0}
-  targetCharacterDirection: {x: 0, y: 0}
-  characterBody: {fileID: 636285021}
 --- !u!1 &1302342965
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,6 +403,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2508958013385835971, guid: e4bff17bde54cd241b05f922813a9b19,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Enabled
       value: 0
@@ -497,6 +471,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7652386261324927468, guid: e4bff17bde54cd241b05f922813a9b19,
+        type: 3}
+      propertyPath: m_Name
+      value: Flashlight
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4bff17bde54cd241b05f922813a9b19, type: 3}
