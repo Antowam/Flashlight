@@ -3588,10 +3588,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bad511c4ee38fc743aaeecce6654cef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverJoinGameButton: {fileID: 8850525765193945384, guid: 1bae23ed900463e428a8ecbe268f3686,
+  serverJoinGameButton: {fileID: 8850525765193945384, guid: d81e779b838acce418994f71b9eaca91,
     type: 3}
   serverListPanel: {fileID: 796831320}
   serverName: 
+  levelName: Room
   serverNameText: {fileID: 959712798}
   mapID: []
 --- !u!4 &1864460750
