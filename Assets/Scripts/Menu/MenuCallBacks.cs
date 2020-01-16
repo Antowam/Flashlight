@@ -11,10 +11,11 @@ public class MenuCallBacks : Bolt.GlobalEventListener
     public Button serverJoinGameButton;
     public GameObject serverListPanel;
     private List<Button> joinServerButtonList = new List<Button>();
-    private float buttonSpacing = -100.0f;
 
     public string serverName = "";
     public TextMeshProUGUI serverNameText;
+
+    public List<string> mapID = new List<string>();
 
     //This is just for easy testing so that i can move game windows
     private void Awake()
@@ -45,10 +46,11 @@ public class MenuCallBacks : Bolt.GlobalEventListener
         if (BoltNetwork.IsServer)
         {
             string matchName = serverName;
+            string levelName = "Level_02";
 
             BoltMatchmaking.CreateSession( 
                 sessionID: matchName, 
-                sceneToLoad: "Level_01"
+                sceneToLoad: levelName
             );
         }
     }
