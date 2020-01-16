@@ -63,7 +63,7 @@ public class MenuCallBacks : Bolt.GlobalEventListener
             Button joinGameButtonClone = Instantiate(serverJoinGameButton);
             joinGameButtonClone.transform.SetParent(serverListPanel.transform);
             joinGameButtonClone.transform.localScale = new Vector3(1, 1, 1);
-            joinGameButtonClone.transform.localPosition = new Vector3(0, buttonSpacing * joinServerButtonList.Count, 0);
+            //joinGameButtonClone.transform.localPosition = new Vector3(0, buttonSpacing * joinServerButtonList.Count, 0);
             joinGameButtonClone.GetComponentInChildren<TextMeshProUGUI>().text = photonSession.HostName;
 
             joinGameButtonClone.onClick.AddListener(() => JoinGame(photonSession));
@@ -81,6 +81,11 @@ public class MenuCallBacks : Bolt.GlobalEventListener
     public void JoinGame(UdpSession photonSession)
     {
         BoltNetwork.Connect(photonSession);
+    }
+
+    public void QuickJoin()
+    {
+        BoltMatchmaking.JoinRandomSession();
     }
 
     private void ClearServerList()
