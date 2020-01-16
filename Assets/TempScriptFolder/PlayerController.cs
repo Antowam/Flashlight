@@ -5,22 +5,19 @@
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    public const string HorizontalInput = "Horizontal";
-    public const string VerticalInput = "Vertical";
-    
-
-    Rigidbody rb;
-
-
-    public float moveSpeed = 5f;
-    public int batterySize = 100;
-
-
-
+    #region Private variables
     private float translationZ;
     private float translationX;
+    #endregion
 
+    #region Mouse Input
+    public const string HorizontalInput = "Horizontal";
+    public const string VerticalInput = "Vertical";
+    #endregion
 
+    [Header("Player Attributes")]
+    public float moveSpeed = 5f;
+    public int batterySize = 100;
 
 
 
