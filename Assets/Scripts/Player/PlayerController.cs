@@ -1,28 +1,30 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    #region Private variables
     private float translationZ;
     private float translationX;
-    #endregion
 
-    #region Mouse Input
-    public const string HorizontalInput = "Horizontal";
-    public const string VerticalInput = "Vertical";
-    #endregion
+    
+    
 
+
+    private Rigidbody rb;
+    
     [Header("Player Attributes")]
     public float moveSpeed = 5f;
     public int batterySize = 100;
 
-
-
-
-
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+    
+    
     private void FixedUpdate()
     {
         Move();
@@ -35,3 +37,4 @@ public class PlayerController : MonoBehaviour
         transform.Translate(translationX, 0, translationZ);
     }
 }
+
