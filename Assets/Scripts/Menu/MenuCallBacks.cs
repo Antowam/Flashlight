@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bolt.Matchmaking;
+using System;
 using UdpKit;
 
 public class MenuCallBacks : Bolt.GlobalEventListener
@@ -21,10 +22,12 @@ public class MenuCallBacks : Bolt.GlobalEventListener
         //If it was called from the host of the game
         if (BoltNetwork.IsServer)
         {
-            string matchName = "Its a match";
+            string matchName = "Its_a_match";
 
-            BoltNetwork.SetServerInfo(matchName, null);
-            BoltNetwork.LoadScene("SampleScene");
+            BoltMatchmaking.CreateSession( 
+                sessionID: matchName, 
+                sceneToLoad: "Room"
+            );
         }
     }
 
