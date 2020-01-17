@@ -13,15 +13,16 @@ public class TestPlayerMovement : Bolt.EntityBehaviour<ICustomPlayerState>
     public float moveSpeed = 5f;
     public int batterySize = 100;
 
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
+    //private void Start()
+    //{
+    //    rb = GetComponent<Rigidbody>();
+    //}
 
     //Networked void start
     public override void Attached()
     {
         state.SetTransforms(state.PlayerTransform, gameObject.transform);
+        rb = GetComponent<Rigidbody>();
     }
 
     //private void FixedUpdate()
