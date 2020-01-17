@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+
+//Script that handles and control the flashlight
 public class Flashlight : MonoBehaviour
 {
     PlayerController controller;
