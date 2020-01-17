@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 2393525271598188953}
   - component: {fileID: 4118934211475793358}
   - component: {fileID: 4434137634908599686}
+  - component: {fileID: 7864656041623993852}
   m_Layer: 0
   m_Name: tempPlayer
   m_TagString: Untagged
@@ -241,8 +242,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac4b4dfb3ca03447a251c5c6f1150f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
   batterySize: 100
+--- !u!114 &7864656041623993852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5432277585156947053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4052d4cfa250fb8468365fc1225a840d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
 --- !u!1 &7186135755841603087
 GameObject:
   m_ObjectHideFlags: 0

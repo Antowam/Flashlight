@@ -566,5 +566,6 @@ PrefabInstance:
       propertyPath: m_SpotAngle
       value: 47
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7864656041623993852, guid: 2ef28dcb90584da4ba119e784380fa81, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2ef28dcb90584da4ba119e784380fa81, type: 3}
