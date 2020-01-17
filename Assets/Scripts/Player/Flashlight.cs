@@ -5,16 +5,23 @@
 public class Flashlight : MonoBehaviour
 {
     PlayerController controller;
+    FlashlightFlickerEffect flickerEffect;
 
     public Light flashLight;
+
     private bool isLightOn = false;
     public float maxBattery = 100f;
     private float currentBattery;
 
+
+
+
     private void Awake()
     {
-        currentBattery = (int)maxBattery;
+        flickerEffect = GetComponent<FlashlightFlickerEffect>();
+        flickerEffect.enabled = false;
 
+        currentBattery = maxBattery;
         flashLight.enabled = false;
         flashLight.intensity = 2f;
         flashLight.spotAngle = 65f;
@@ -27,7 +34,6 @@ public class Flashlight : MonoBehaviour
             DrainBattery(4f);
             Debug.Log("Battery: " + currentBattery);
         }
-
         HandleFlashLight(KeyCode.E);
     }
 
@@ -48,5 +54,9 @@ public class Flashlight : MonoBehaviour
     void DrainBattery(float drainValue)
     {
         currentBattery -= drainValue * Time.deltaTime;
+        if (currentBattery < 35)
+        {
+            flickerEffect.enabled = true;
+        }
     }
 }
