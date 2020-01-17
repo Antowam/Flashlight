@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 2419048705427139379}
   m_Layer: 0
   m_Name: NetGhost
-  m_TagString: Player
+  m_TagString: Ghost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

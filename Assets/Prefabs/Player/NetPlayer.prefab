@@ -231,7 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sceneGuid: 
   _serializerGuid: 76a21f50-f1d8-49cd-8f89-fd8dd052d983
-  _prefabId: 13
+  _prefabId: 14
   _updateRate: 1
   _autoFreezeProxyFrames: 0
   _clientPredicted: 1
@@ -410,8 +410,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e059114984e4ee4daa068e43cc83691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerType: 1
-  _body: {fileID: 5004413138889800655}
   moveSpeed: 5
   batterySize: 100
 --- !u!114 &3150492518941500523
