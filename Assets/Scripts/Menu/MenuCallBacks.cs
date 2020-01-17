@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using Bolt.Matchmaking;
-using System;
-using UdpKit;
-using UnityEngine.UI;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Bolt.Matchmaking;
+using UdpKit;
 using TMPro;
 
 public class MenuCallBacks : Bolt.GlobalEventListener
@@ -12,7 +12,7 @@ public class MenuCallBacks : Bolt.GlobalEventListener
     public GameObject serverListPanel;
     private List<Button> joinServerButtonList = new List<Button>();
 
-    string serverName = "";
+    string serverName;
     public TextMeshProUGUI serverNameText;
 
     public List<MapObject> mapID = new List<MapObject>();
@@ -35,9 +35,13 @@ public class MenuCallBacks : Bolt.GlobalEventListener
     //What happens when you click the host server button
     public void StartServer()
     {
-        if(serverName != null)
+        if (serverNameText.text != null)
         {
             serverName = serverNameText.text;
+        }
+        else
+        {
+            serverName = "No Name " + UnityEngine.Random.Range(0, 25555);
         }
         BoltLauncher.StartServer();
     }
