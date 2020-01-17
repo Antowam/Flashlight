@@ -89,6 +89,7 @@ public class MenuCallBacks : Bolt.GlobalEventListener
             
             joinServerButtonList.Add(joinGameButtonClone);
         }
+        BoltLauncher.Shutdown();
     }
 
     //Join game function but on buttons
