@@ -8,6 +8,8 @@ public class Flashlight : MonoBehaviour
     private void Awake()
     {
         flashLight.enabled = false;
+        flashLight.intensity = 2f;
+        flashLight.spotAngle = 65f;
     }
 
     private void Update()
