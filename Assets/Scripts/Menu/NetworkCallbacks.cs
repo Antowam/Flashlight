@@ -18,7 +18,7 @@ public class NetworkCallbacks : Bolt.GlobalEventListener
 
         //Position to spawn player at
         Vector3 spawnPos = Vector3.zero;
-        if (spawnPoints.Count == 0)
+        if (spawnPoints.Count > 0)
         {
             spawnPos = spawnPoints[Random.Range(0, spawnPoints.Count)].position;
         }
