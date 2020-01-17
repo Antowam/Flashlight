@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class TestPlayerMovement : Bolt.EntityBehaviour<ICustomPlayerState>
+public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
 {
     private float translationZ;
     private float translationX;
@@ -18,10 +18,10 @@ public class TestPlayerMovement : Bolt.EntityBehaviour<ICustomPlayerState>
     //    rb = GetComponent<Rigidbody>();
     //}
 
-    //Networked void start
+    //Networked void Start()
     public override void Attached()
     {
-        state.SetTransforms(state.PlayerTransform, gameObject.transform);
+        state.SetTransforms(state.PlayerTransform, transform);
         rb = GetComponent<Rigidbody>();
     }
 
@@ -30,10 +30,12 @@ public class TestPlayerMovement : Bolt.EntityBehaviour<ICustomPlayerState>
     //    Move();
     //}
 
+        // void Update()
     public override void SimulateOwner()
     {
         Move();
     }
+
 
     private void Move()
     {
