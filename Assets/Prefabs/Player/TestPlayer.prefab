@@ -387,8 +387,6 @@ MonoBehaviour:
   targetDirection: {x: 0, y: 0}
   targetCharacterDirection: {x: 0, y: 0}
   characterBody: {fileID: 2896237378622419219}
-  flashLight: {fileID: 0}
-  camera: {fileID: 0}
 --- !u!54 &8694024260420210233
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -445,7 +443,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashLight: {fileID: 1746119846793123882}
-  maxBattery: 100
 --- !u!1 &2910231333518912709
 GameObject:
   m_ObjectHideFlags: 0
