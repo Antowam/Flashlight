@@ -13,29 +13,16 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
     public float moveSpeed = 5f;
     public int batterySize = 100;
 
-    //private void Start()
-    //{
-    //    rb = GetComponent<Rigidbody>();
-    //}
-
-    //Networked void Start()
     public override void Attached()
     {
         state.SetTransforms(state.PlayerTransform, transform);
         rb = GetComponent<Rigidbody>();
     }
 
-    //private void FixedUpdate()
-    //{
-    //    Move();
-    //}
-
-        // void Update()
     public override void SimulateOwner()
     {
         Move();
     }
-
 
     private void Move()
     {

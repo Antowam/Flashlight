@@ -335,8 +335,9 @@ GameObject:
   - component: {fileID: 1387389399042212508}
   - component: {fileID: 3150492518941500523}
   - component: {fileID: 7630510426150531796}
+  - component: {fileID: 1780734946415399529}
   m_Layer: 0
-  m_Name: PlayerBody
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -409,6 +410,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e059114984e4ee4daa068e43cc83691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerType: 1
+  _body: {fileID: 5004413138889800655}
   moveSpeed: 5
   batterySize: 100
 --- !u!114 &3150492518941500523
@@ -443,6 +446,22 @@ MonoBehaviour:
   targetDirection: {x: 0, y: 0}
   targetCharacterDirection: {x: 0, y: 0}
   characterBody: {fileID: 2896237378622419219}
+--- !u!114 &1780734946415399529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896237378622419219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84dd59e4255ccca4da643775cec8b35a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  light: {fileID: 1746119846793123882}
+  minIntensity: 1.5
+  maxIntensity: 4
+  smoothing: 10
 --- !u!1 &2910231333518912709
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,7 +597,7 @@ GameObject:
   - component: {fileID: 6687054720746094309}
   - component: {fileID: 3614371751541014870}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -623,7 +642,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 30ff9a65eff2cd14395972380cc444b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -33,10 +33,16 @@ public class NetMouseLook : Bolt.EntityBehaviour<ICustomPlayerState>
 
     public void Look()
     {
-        if (lockCursor)
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            if (lockCursor)
+                lockCursor = false;
+            else if (!lockCursor)
+                lockCursor = true;
         }
+
+        if (lockCursor)
+            return;
 
         var targetOrientation = Quaternion.Euler(targetDirection);
         var targetCharacterOrientation = Quaternion.Euler(targetCharacterDirection);
