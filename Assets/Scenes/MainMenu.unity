@@ -4212,7 +4212,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7cdebc08f872b584ebe11aee0ad187e3, type: 2}
   - {fileID: 11400000, guid: d49cf4f079a54674ab35952193c1fb93, type: 2}
   - {fileID: 11400000, guid: 00a713fe57ff20447b535abd4c933cff, type: 2}
-  - {fileID: 11400000, guid: aebae266c9212eb42b5c8d5db1259a91, type: 2}
   mapName: {fileID: 762338538}
   mapImage: {fileID: 1588555720}
 --- !u!4 &1864460750
