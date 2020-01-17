@@ -12,15 +12,24 @@ public class MenuCallBacks : Bolt.GlobalEventListener
     public GameObject serverListPanel;
     private List<Button> joinServerButtonList = new List<Button>();
 
-    public string serverName = "";
+    string serverName = "";
     public TextMeshProUGUI serverNameText;
 
-    public List<string> mapID = new List<string>();
+    public List<MapObject> mapID = new List<MapObject>();
+    int mapSelValue = 0;
+    public TextMeshProUGUI mapName;
+    public Image mapImage;
 
     //This is just for easy testing so that i can move game windows
     private void Awake()
     {
         Screen.fullScreen = false;
+    }
+
+    private void Start()
+    {
+        mapSelValue = 0;
+        SetMapSelection();
     }
 
     //What happens when you click the host server button
@@ -46,7 +55,7 @@ public class MenuCallBacks : Bolt.GlobalEventListener
         if (BoltNetwork.IsServer)
         {
             string matchName = serverName;
-            string levelName = "Level_02";
+            string levelName = mapName.text;
 
             BoltMatchmaking.CreateSession( 
                 sessionID: matchName, 
@@ -99,6 +108,41 @@ public class MenuCallBacks : Bolt.GlobalEventListener
         }
 
         joinServerButtonList.Clear();
+    }
+
+    void SetMapSelection()
+    {
+        mapName.text = mapID[mapSelValue].name;
+        mapImage.sprite = mapID[mapSelValue].levelThumbnail;
+    }
+
+    //What happens when you press the right map selection button
+    public void ScrollRightMapList()
+    {
+        if(mapSelValue < mapID.Count - 1)
+        {
+            mapSelValue++;
+            SetMapSelection();
+        }
+        else
+        {
+            mapSelValue = 0;
+            SetMapSelection();
+        }
+    }
+    //What happens when you press the left map selection button
+    public void ScrollLeftMapList()
+    {
+        if (mapSelValue <= mapID.Count && mapSelValue > 0)
+        {
+            mapSelValue--;
+            SetMapSelection();
+        }
+        else
+        {
+            mapSelValue = mapID.Count - 1;
+            SetMapSelection();
+        }
     }
 
     //fixes problem with entering server list and going back and back to list

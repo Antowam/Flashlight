@@ -524,7 +524,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 435626117}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1864460749}
+        m_MethodName: ScrollRightMapList
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &435626117
@@ -872,7 +883,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 595300811}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1864460749}
+        m_MethodName: ScrollLeftMapList
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &595300811
@@ -3198,7 +3220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1468386510
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4141,9 +4163,13 @@ MonoBehaviour:
   serverJoinGameButton: {fileID: 8850525765193945384, guid: d81e779b838acce418994f71b9eaca91,
     type: 3}
   serverListPanel: {fileID: 796831320}
-  serverName: 
   serverNameText: {fileID: 959712798}
-  mapID: []
+  mapID:
+  - {fileID: 11400000, guid: 7cdebc08f872b584ebe11aee0ad187e3, type: 2}
+  - {fileID: 11400000, guid: d49cf4f079a54674ab35952193c1fb93, type: 2}
+  mapSelValue: 0
+  mapName: {fileID: 762338538}
+  mapImage: {fileID: 1588555720}
 --- !u!4 &1864460750
 Transform:
   m_ObjectHideFlags: 0
@@ -4422,7 +4448,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2136880893
 RectTransform:
   m_ObjectHideFlags: 0
