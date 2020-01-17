@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+
+//script that allows player to look around
 public class MouseLook : MonoBehaviour
 {
     Vector2 _mouseAbsolute;
@@ -15,7 +17,8 @@ public class MouseLook : MonoBehaviour
     public Vector2 targetDirection;
     public Vector2 targetCharacterDirection;
     public GameObject characterBody;
-
+    public GameObject flashLight;
+    public GameObject camera;
 
     
 
@@ -74,10 +77,7 @@ public class MouseLook : MonoBehaviour
             var yRotation = Quaternion.AngleAxis(_mouseAbsolute.x, transform.InverseTransformDirection(Vector3.up));
             transform.localRotation *= yRotation;
         }
-
-        
-        
-
+        flashLight.transform.localRotation = camera.transform.localRotation;
     }
 }
 
