@@ -28,6 +28,6 @@ public class NetworkCallbacks : Bolt.GlobalEventListener
         }
 
         //Spawning the player
-        BoltNetwork.Instantiate(BoltPrefabs.Player, spawnPos, Quaternion.identity);
+        BoltNetwork.Instantiate(BoltPrefabs.TestPlayer, spawnPos, Quaternion.identity);
     }
 }
