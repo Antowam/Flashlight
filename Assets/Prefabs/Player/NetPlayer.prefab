@@ -262,7 +262,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6090653194529369604
 Transform:
   m_ObjectHideFlags: 0
@@ -336,6 +336,7 @@ GameObject:
   - component: {fileID: 3150492518941500523}
   - component: {fileID: 7630510426150531796}
   - component: {fileID: 1780734946415399529}
+  - component: {fileID: 6809721817502171839}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -439,8 +440,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clampInDegrees: {x: 360, y: 180}
   lockCursor: 0
-  sensitivity: {x: 2, y: 2}
-  smoothing: {x: 3, y: 3}
+  sensitivity: {x: 1, y: 1}
+  smoothing: {x: 2, y: 2}
   targetDirection: {x: 0, y: 0}
   targetCharacterDirection: {x: 0, y: 0}
   characterBody: {fileID: 2896237378622419219}
@@ -460,6 +461,19 @@ MonoBehaviour:
   minIntensity: 1.5
   maxIntensity: 4
   smoothing: 10
+--- !u!114 &6809721817502171839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896237378622419219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfebac2c28eea814794ef343b4a8eb20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityCamera: {fileID: 2669293990659561251}
 --- !u!1 &2910231333518912709
 GameObject:
   m_ObjectHideFlags: 0
