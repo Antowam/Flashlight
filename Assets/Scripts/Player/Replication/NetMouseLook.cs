@@ -2,18 +2,18 @@
 
 public class NetMouseLook : Bolt.EntityBehaviour<ICustomPlayerState>
 {
-    Vector2 _mouseAbsolute;
-    Vector2 _smoothMouse;
+    Vector3 _mouseAbsolute;
+    Vector3 _smoothMouse;
 
     public const string MouseXInput = "Mouse X";
     public const string MouseYInput = "Mouse Y";
 
     public Vector2 clampInDegrees = new Vector2(360, 180);
     public bool lockCursor;
-    public Vector2 sensitivity = new Vector2(2, 2);
-    public Vector2 smoothing = new Vector2(3, 3);
-    public Vector2 targetDirection;
-    public Vector2 targetCharacterDirection;
+    public Vector3 sensitivity = new Vector3(2, 2, 2);
+    public Vector2 smoothing = new Vector3(3, 3, 3);
+    public Vector3 targetDirection;
+    public Vector3 targetCharacterDirection;
     public GameObject characterBody;
 
     public override void Attached()

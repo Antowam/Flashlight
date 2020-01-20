@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class NetGhostBehaviour : Bolt.EntityBehaviour<ICustomPlayerState>
 {
-    [SerializeField] private GameObject _mesh;
+    [Header("Behaviors")]
+    [SerializeField] private VisibilityTrigger vt;
 
-    public override void Attached()
-    {
-        _mesh.SetActive(false);
+    void Update(){
+        CheckForInput();   
     }
 
-    public override void SimulateOwner()
-    {
-
+    private void CheckForInput() {
+        if (Input.GetKeyDown(KeyCode.V))
+            vt.ActivateVisibilityChange();
+        if(Input.GetKeyDown(KeyCode.B))
+            vt.ActivateDebugTriggerSphere();
     }
 }
