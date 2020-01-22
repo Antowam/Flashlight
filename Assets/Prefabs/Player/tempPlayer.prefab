@@ -246,6 +246,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashLight: {fileID: 3183543501916258310}
   maxBattery: 100
+  flickerBool: 0
+  drainAmount: 0
 --- !u!114 &8010796877503542781
 MonoBehaviour:
   m_ObjectHideFlags: 0

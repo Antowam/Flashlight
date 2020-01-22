@@ -515,6 +515,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: tempPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 3183543501916258310, guid: 2ef28dcb90584da4ba119e784380fa81,
+        type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3183543501916258310, guid: 2ef28dcb90584da4ba119e784380fa81,
+        type: 3}
+      propertyPath: m_SpotAngle
+      value: 47
+      objectReference: {fileID: 0}
     - target: {fileID: 1990804045005975659, guid: 2ef28dcb90584da4ba119e784380fa81,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -579,16 +589,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.419
-      objectReference: {fileID: 0}
-    - target: {fileID: 3183543501916258310, guid: 2ef28dcb90584da4ba119e784380fa81,
-        type: 3}
-      propertyPath: m_InnerSpotAngle
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3183543501916258310, guid: 2ef28dcb90584da4ba119e784380fa81,
-        type: 3}
-      propertyPath: m_SpotAngle
-      value: 47
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ef28dcb90584da4ba119e784380fa81, type: 3}
