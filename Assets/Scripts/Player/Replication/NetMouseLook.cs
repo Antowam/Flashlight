@@ -1,78 +1,87 @@
 ﻿using UnityEngine;
+using Bolt;
 
 public class NetMouseLook : Bolt.EntityBehaviour<ICustomPlayerState>
 {
-    Vector3 _mouseAbsolute;
-    Vector3 _smoothMouse;
+    //float yaw;
+    //float pitch;
 
-    public const string MouseXInput = "Mouse X";
-    public const string MouseYInput = "Mouse Y";
+    //const float mouseSensitivity = 1.0f;
+    //public float clampAngle = 80.0f;
 
-    public Vector2 clampInDegrees = new Vector2(360, 180);
-    public bool lockCursor;
-    public Vector3 sensitivity = new Vector3(2, 2, 2);
-    public Vector2 smoothing = new Vector3(3, 3, 3);
-    public Vector3 targetDirection;
-    public Vector3 targetCharacterDirection;
-    public GameObject characterBody;
+    //public const string MouseXInput = "Mouse X";
+    //public const string MouseYInput = "Mouse Y";
 
-    public override void Attached()
-    {
-        Cursor.visible = false;
+    //public GameObject characterBody;
 
-        targetDirection = transform.localRotation.eulerAngles;
+    //private void Start()
+    //{
+    //    Cursor.visible = false;
+    //}
 
-        if (characterBody)
-            targetCharacterDirection = characterBody.transform.localRotation.eulerAngles;
-    }
+    ////public override void Attached()
+    ////{
+    ////    state.SetTransforms(state.PlayerTransform, transform);
+    ////}
 
-    public override void SimulateOwner()
-    {
-        Look();
-    }
+    //void PollKeys()
+    //{
+    //    yaw += (Input.GetAxisRaw("Mouse X") * mouseSensitivity);
+    //    yaw %= 360f;
 
-    public void Look()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (lockCursor)
-                lockCursor = false;
-            else if (!lockCursor)
-                lockCursor = true;
-        }
+    //    pitch += (-Input.GetAxisRaw("Mouse Y") * mouseSensitivity);
+    //    pitch = Mathf.Clamp(pitch, -85f, +85f);
+    //}
 
-        if (lockCursor)
-            return;
+    //private void Update()
+    //{
+    //    //if (entity.HasControl)
+    //    //    PollKeys();
 
-        var targetOrientation = Quaternion.Euler(targetDirection);
-        var targetCharacterOrientation = Quaternion.Euler(targetCharacterDirection);
+    //    //if (entity.IsOwner)
+    //    //    Look(yaw, pitch);
+    //}
 
-        var mouseDelta = new Vector2(Input.GetAxisRaw(MouseXInput), Input.GetAxisRaw(MouseYInput));
+    //public override void SimulateController()
+    //{
+    //    PollKeys();
 
-        mouseDelta = Vector2.Scale(mouseDelta, new Vector2(sensitivity.x * smoothing.x, sensitivity.y * smoothing.y));
+    //    ICustomPlayerCommandInput input = CustomPlayerCommand.Create();
 
-        _smoothMouse.x = Mathf.Lerp(_smoothMouse.x, mouseDelta.x, 1f / smoothing.x);
-        _smoothMouse.y = Mathf.Lerp(_smoothMouse.y, mouseDelta.y, 1f / smoothing.y);
+    //    input.Yaw = yaw;
+    //    input.Pitch = pitch;
+        
+    //    entity.QueueInput(input);
+    //}
 
-        _mouseAbsolute += _smoothMouse;
+    //public override void ExecuteCommand(Command command, bool resetState)
+    //{
+    //    CustomPlayerCommand cmd = (CustomPlayerCommand)command;
 
-        if (clampInDegrees.x < 360)
-            _mouseAbsolute.x = Mathf.Clamp(_mouseAbsolute.x, -clampInDegrees.x * 0.5f, clampInDegrees.x * 0.5f);
+    //    if (resetState)
+    //    {
+    //        RotateBack(cmd.Result.PlayerRotation);
+    //    }
+    //    else
+    //    {
+    //        Look(cmd.Input.Yaw, cmd.Input.Pitch);
 
-        if (clampInDegrees.y < 360)
-            _mouseAbsolute.y = Mathf.Clamp(_mouseAbsolute.y, -clampInDegrees.y * 0.5f, clampInDegrees.y * 0.5f);
+    //        cmd.Result.PlayerRotation = characterBody.transform.rotation;
+    //    }
+    //}
 
-        transform.localRotation = Quaternion.AngleAxis(-_mouseAbsolute.y, targetOrientation * Vector3.right) * targetOrientation;
+    //public void Look(float yaw, float pitch)
+    //{
+    //    Camera playerCam = characterBody.GetComponentInChildren<Camera>();
+    //    if (playerCam != null)
+    //    {
+    //        playerCam.transform.rotation = Quaternion.Euler(pitch, 0, 0);
+    //    }
+    //    gameObject.transform.rotation = Quaternion.Euler(0, yaw, 0);
+    //}
 
-        if (characterBody)
-        {
-            var yRotation = Quaternion.AngleAxis(_mouseAbsolute.x, Vector3.up);
-            characterBody.transform.localRotation = yRotation * targetCharacterOrientation;
-        }
-        else
-        {
-            var yRotation = Quaternion.AngleAxis(_mouseAbsolute.x, transform.InverseTransformDirection(Vector3.up));
-            transform.localRotation *= yRotation;
-        }
-    }
-} 
+    //void RotateBack(Quaternion playerRotation)
+    //{
+    //    gameObject.transform.localRotation = playerRotation;
+    //}
+}
