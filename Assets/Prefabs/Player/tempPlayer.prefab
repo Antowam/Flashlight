@@ -248,7 +248,7 @@ MonoBehaviour:
   maxBattery: 100
   currentBattery: 0
   flicker: 0
-  drainAmount: 0
+  drainAmount: 1
 --- !u!114 &8010796877503542781
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public class Flashlight : MonoBehaviour
 
     private bool isLightOn = false;
     public float maxBattery = 100f;
-    [HideInInspector]public float currentBattery;
+    public float currentBattery;
     public bool flicker;
 
     [Tooltip("Drain amount for the flashlight battery")]

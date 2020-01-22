@@ -3,9 +3,9 @@
 [RequireComponent(typeof(SphereCollider))]
 public class Battery : MonoBehaviour
 {
+    GameObject player;
     Flashlight flashLight;
     SphereCollider sphereCollider;
-    GameObject player;
 
     public float charge;
 
@@ -19,28 +19,5 @@ public class Battery : MonoBehaviour
     private void Update()
     {
         
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("collided with player");
-
-
-
-
-
-        if (other == player)
-        {
-            //Debug.Log("collided with player");
-            //AddBatteryCharge();
-        }
-    }
-
-    void AddBatteryCharge()
-    {
-        if(flashLight.currentBattery < flashLight.maxBattery)
-        {
-            _ = flashLight.currentBattery + charge;
-        }
     }
 }
