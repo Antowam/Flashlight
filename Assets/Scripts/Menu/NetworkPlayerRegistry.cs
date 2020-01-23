@@ -23,7 +23,7 @@ public static class NetworkPlayerRegistry
         return player;
     }
 
-    public static IEnumerable<NetPlayerHandling> GetAllPlayers
+    public static List<NetPlayerHandling> GetAllPlayers
     {
         get { return players; }
     }
