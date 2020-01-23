@@ -13,14 +13,13 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
 
     const float mouseSensitivity = 1.0f;
     public float clampAngle = 80.0f;
-    Camera playerCam;
 
-    Vector3 playerPos;
-
+    public bool isDead = false;
+    
     private Rigidbody rb;
-    [SerializeField] GameObject playerBody;
-    [SerializeField] Vector3 forward;
-    [SerializeField] Vector3 right;
+    GameObject playerBody;
+    Vector3 forward;
+    Vector3 right;
 
     [Header("Player Attributes")]
     public float moveSpeed = 5f;
@@ -35,8 +34,16 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
 
     void PollKeys(bool mouse)
     {
-        translationX = Input.GetAxisRaw("Horizontal");
-        translationZ = Input.GetAxisRaw("Vertical");
+        if(!isDead)
+        {
+            translationX = Input.GetAxisRaw("Horizontal");
+            translationZ = Input.GetAxisRaw("Vertical");
+        }
+        else
+        {
+            translationX = 0;
+            translationZ = 0;
+        }
 
         if(mouse)
         {
@@ -128,6 +135,28 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
 
         //Move back the player
         Move(0, 0, playerPosition - gameObject.transform.localPosition, playerRotation.y - gameObject.transform.localRotation.y, playerRotation.x - gameObject.transform.localRotation.x);
+    }
+
+    void Die()
+    {
+        if(isDead == true)
+        {
+            Debug.Log("YOU DIED, do cool stuff here");
+            //Stop the players movement
+            rb.velocity = Vector3.zero;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject != this.gameObject)
+        {
+            if(other.CompareTag("Ghost"))
+            {
+                isDead = true;
+                Die();
+            }
+        }
     }
 }
 

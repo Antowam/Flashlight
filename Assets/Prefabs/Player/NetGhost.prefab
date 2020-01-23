@@ -790,6 +790,7 @@ GameObject:
   - component: {fileID: 8347755806177796462}
   - component: {fileID: 807408143814912194}
   - component: {fileID: 1481325485918886168}
+  - component: {fileID: 7278193823359154923}
   - component: {fileID: 6758816684320247282}
   m_Layer: 0
   m_Name: Ghost
@@ -867,9 +868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clampAngle: 80
-  playerBody: {fileID: 0}
-  forward: {x: 0, y: 0, z: 0}
-  right: {x: 0, y: 0, z: 0}
+  isDead: 0
   moveSpeed: 3
   batterySize: 100
 --- !u!114 &807408143814912194
@@ -897,6 +896,20 @@ CapsuleCollider:
   m_Enabled: 1
   m_Radius: 0.25
   m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &7278193823359154923
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2896237378622419219}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.26
+  m_Height: 1.02
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6758816684320247282
