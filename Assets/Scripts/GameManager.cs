@@ -18,7 +18,7 @@ public class GameManager : Bolt.GlobalEventListener
 
     private void Update()
     {
-        GetInstance().GetPlayers();
+        //GetInstance().GetPlayers();
     }
 
     public void GetPlayers()

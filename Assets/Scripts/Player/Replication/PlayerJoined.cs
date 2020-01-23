@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerJoined : Bolt.EntityBehaviour<ICustomPlayerState>
 {
     public Camera entityCamera;
+    public GameObject playerHUD;
     private string username;
 
     /*
@@ -43,6 +44,8 @@ public class PlayerJoined : Bolt.EntityBehaviour<ICustomPlayerState>
         if (entity.HasControl && entityCamera.gameObject.activeInHierarchy == false)
         {
             entityCamera.gameObject.SetActive(true);
+            if(playerHUD != null)
+                playerHUD.gameObject.SetActive(true);
         }
     }
 
