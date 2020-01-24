@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8950280688764349596}
   m_Layer: 0
   m_Name: Battery
-  m_TagString: Untagged
+  m_TagString: Battery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,4 +105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51e98b350ee12d4e8cc72b28d2dfd6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charge: 20
+  player: {fileID: 0}
+  flashLight: {fileID: 0}
+  batteryCharge: 0
