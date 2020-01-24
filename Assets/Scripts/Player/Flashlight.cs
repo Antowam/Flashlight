@@ -49,7 +49,7 @@ public class Flashlight : MonoBehaviour
             DetectEnemy();
         }
 
-        if(Input.GetKeyDown(key) && !isLightOn)
+        if(Input.GetKeyDown(key) && !isLightOn && currentBattery > 0)
         {
             flashLight.enabled = true;
             isLightOn = true;
@@ -93,7 +93,12 @@ public class Flashlight : MonoBehaviour
         if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, flashLight.range))
         {
             Debug.DrawRay(transform.position, Vector3.forward, Color.red);
-            Debug.Log("Did Hit " + hit.collider);
+            Debug.Log("Did Hit " + hit.collider.tag);
+            if(hit.collider.tag == "Ghost")
+            {
+                //TODO: Do some sort of damage to the ghost
+                Debug.Log("GHOST");
+            }
         }
     }
 }
