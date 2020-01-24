@@ -9,10 +9,15 @@ public class SpawnPickup : MonoBehaviour
 
     private void Awake()
     {
-        Spawn();
+        SpawnBattery();
     }
 
-    void Spawn()
+    private void Update()
+    {
+        RespawnSpawnBatteryPickup();
+    }
+
+    void SpawnBattery()
     {
         GameObject[] worldSpawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
 
@@ -29,10 +34,14 @@ public class SpawnPickup : MonoBehaviour
         {
             spawnPos = Vector3.zero;
         }
-
         Instantiate(spawnObj, spawnPos, Quaternion.identity);
-
     }
-
-
+    void RespawnSpawnBatteryPickup()
+    {
+        if(GameObject.FindGameObjectWithTag("Battery") == null)
+        {
+            Debug.Log("No battery pickup found, spawning new pickup");
+            SpawnBattery();
+        }
+    }
 }
