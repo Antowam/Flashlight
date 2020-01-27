@@ -48,7 +48,7 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
             translationZ = 0;
         }
 
-        if(mouse)
+        if(mouse && !isDead)
         {
             yaw += (Input.GetAxisRaw("Mouse X") * mouseSensitivity);
             yaw %= 360f;
