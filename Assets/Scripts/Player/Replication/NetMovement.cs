@@ -1,6 +1,7 @@
 ﻿using System;
 using Bolt;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
@@ -18,6 +19,7 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
     
     private Rigidbody rb;
     GameObject playerBody;
+    PlayerJoined playerJoined;
     Vector3 forward;
     Vector3 right;
 
@@ -29,6 +31,7 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         state.SetTransforms(state.PlayerTransform, transform);
         rb = GetComponent<Rigidbody>();
+        playerJoined = GetComponent<PlayerJoined>();
         playerBody = transform.gameObject;
     }
 
@@ -62,6 +65,9 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
 
         forward = playerBody.transform.right;
         right = playerBody.transform.forward;
+
+        if(playerJoined.batteryChargeSlider != null)
+            playerJoined.batteryChargeSlider.value = batterySize;
 
         //This was to fix up and down movement of camera but doesnt work smoothly
         //should not getcomponent in update
@@ -139,11 +145,20 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
 
     void Die()
     {
-        if(isDead == true)
+        isDead = true;
+        if (isDead == true)
         {
             Debug.Log("YOU DIED, do cool stuff here");
             //Stop the players movement
             rb.velocity = Vector3.zero;
+        }
+    }
+
+    void Revived()
+    {
+        if(isDead == true)
+        {
+            isDead = false;
         }
     }
 
@@ -153,8 +168,11 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
         {
             if(other.CompareTag("Ghost"))
             {
-                isDead = true;
                 Die();
+            }
+            else if(other.CompareTag("Player"))
+            {
+                Revived();
             }
         }
     }

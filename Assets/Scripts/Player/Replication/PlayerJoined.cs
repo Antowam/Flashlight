@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerJoined : Bolt.EntityBehaviour<ICustomPlayerState>
 {
     public Camera entityCamera;
     public GameObject playerHUD;
+    public Slider batteryChargeSlider;
     private string username;
 
     /*
@@ -45,7 +47,14 @@ public class PlayerJoined : Bolt.EntityBehaviour<ICustomPlayerState>
         {
             entityCamera.gameObject.SetActive(true);
             if(playerHUD != null)
+            {
                 playerHUD.gameObject.SetActive(true);
+                if(batteryChargeSlider == null)
+                {
+                    batteryChargeSlider = GetComponentInChildren<Slider>();
+                }
+            }
+
         }
     }
 
