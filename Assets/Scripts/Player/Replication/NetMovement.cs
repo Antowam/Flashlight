@@ -12,11 +12,16 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
     float yaw;
     float pitch;
 
+    bool isLightOn = false;
+
     const float mouseSensitivity = 1.0f;
     public float clampAngle = 80.0f;
 
     public bool isDead = false;
-    
+
+    public Light flashLightObject;
+    float lightTimer = 0.0f;
+
     private Rigidbody rb;
     GameObject playerBody;
     PlayerJoined playerJoined;
@@ -25,7 +30,6 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
 
     [Header("Player Attributes")]
     public float moveSpeed = 5f;
-    public int batterySize = 100;
 
     public override void Attached()
     {
@@ -56,18 +60,23 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
             pitch += (-Input.GetAxisRaw("Mouse Y") * mouseSensitivity);
             pitch = Mathf.Clamp(pitch, -85f, +85f);
         }
+
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(1))
+        {
+            isLightOn = !isLightOn;
+        }
     }
 
     private void Update()
     {
-        if(entity.HasControl)
-            PollKeys(true);
+        //if (entity.HasControl)
+        //    PollKeys(true);
 
         forward = playerBody.transform.right;
         right = playerBody.transform.forward;
 
-        if(playerJoined.batteryChargeSlider != null)
-            playerJoined.batteryChargeSlider.value = batterySize;
+        //if(playerJoined.batteryChargeSlider != null)
+        //    playerJoined.batteryChargeSlider.value = flashlight.batterySize;
 
         //This was to fix up and down movement of camera but doesnt work smoothly
         //should not getcomponent in update
@@ -80,7 +89,8 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
 
     public override void SimulateController()
     {
-        PollKeys(false);
+        if(entity.HasControl)
+            PollKeys(true);
 
         ICustomPlayerCommandInput input = CustomPlayerCommand.Create();
         
@@ -89,6 +99,7 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
         input.TranslationZ = translationZ;
         input.Yaw = yaw;
         input.Pitch = pitch;
+        input.isFlashlightOn = isLightOn;
 
         entity.QueueInput(input);
     }
@@ -101,15 +112,24 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
         {
             //if player is non synced send him back to old location
             GoBack(cmd.Result.PlayerPosition, cmd.Result.PlayerRotation);
+            if (flashLightObject != null)
+            {
+                HandleFlashLight(cmd.Result.isFlashlightOn);
+            }
         }
         else
         {
             //send move from server to player
             Move(cmd.Input.TranslationX, cmd.Input.TranslationZ, cmd.Input.PlayerPosition, cmd.Input.Yaw, cmd.Input.Pitch);
+            if(flashLightObject != null)
+            {
+                HandleFlashLight(cmd.Input.isFlashlightOn);
+            }
 
             //set synced variables to player variables
             cmd.Result.PlayerPosition = gameObject.transform.position;
             cmd.Result.PlayerRotation = gameObject.transform.rotation;
+            cmd.Result.isFlashlightOn = isLightOn;
         }
     }
 
@@ -159,6 +179,18 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
         if(isDead == true)
         {
             isDead = false;
+        }
+    }
+
+    public void HandleFlashLight(bool isOn)
+    {
+        if(isOn)
+        {
+            flashLightObject.enabled = true;
+        }
+        else
+        {
+            flashLightObject.enabled = false;
         }
     }
 

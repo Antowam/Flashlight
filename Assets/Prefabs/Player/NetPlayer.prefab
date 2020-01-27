@@ -627,8 +627,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clampAngle: 80
   isDead: 0
+  flashLightObject: {fileID: 1746119846793123882}
   moveSpeed: 5
-  batterySize: 100
 --- !u!114 &3150492518941500523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -642,6 +642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashLight: {fileID: 1746119846793123882}
+  batterySize: 100
 --- !u!114 &7630510426150531796
 MonoBehaviour:
   m_ObjectHideFlags: 0

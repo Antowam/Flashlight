@@ -1059,8 +1059,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clampAngle: 80
   isDead: 0
+  flashLight: {fileID: 0}
   moveSpeed: 3
-  batterySize: 100
 --- !u!114 &807408143814912194
 MonoBehaviour:
   m_ObjectHideFlags: 0

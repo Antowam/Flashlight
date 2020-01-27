@@ -3366,22 +3366,6 @@
             "ExtrapolationMaxFrames": 9,
             "SnapMagnitude": 10.0
           }
-        },
-        {
-          "Name": "isFlashlightOn",
-          "Enabled": true,
-          "Expanded": true,
-          "Priority": 1,
-          "PropertyType": {
-            "$type": "Bolt.Compiler.PropertyTypeBool, bolt.compiler"
-          },
-          "AssetSettings": {
-            "$type": "Bolt.Compiler.PropertyStateSettings, bolt.compiler",
-            "ExtrapolationErrorTolerance": 0.25,
-            "_ExtrapolationCorrectionFrames": 6,
-            "ExtrapolationMaxFrames": 9,
-            "SnapMagnitude": 10.0
-          }
         }
       ],
       "PacketMaxBits": 512,
@@ -3585,6 +3569,18 @@
           "AssetSettings": {
             "$type": "Bolt.Compiler.PropertyCommandSettings, bolt.compiler"
           }
+        },
+        {
+          "Name": "isFlashlightOn",
+          "Enabled": true,
+          "ReplicationMode": 1,
+          "Priority": 1,
+          "PropertyType": {
+            "$type": "Bolt.Compiler.PropertyTypeBool, bolt.compiler"
+          },
+          "AssetSettings": {
+            "$type": "Bolt.Compiler.PropertyCommandSettings, bolt.compiler"
+          }
         }
       ],
       "Result": [
@@ -3633,7 +3629,6 @@
         {
           "Name": "PlayerRotation",
           "Enabled": true,
-          "Expanded": true,
           "ReplicationMode": 1,
           "Priority": 1,
           "PropertyType": {
@@ -3671,6 +3666,18 @@
               "Shift": 1.0,
               "BitsRequired": 8
             }
+          },
+          "AssetSettings": {
+            "$type": "Bolt.Compiler.PropertyCommandSettings, bolt.compiler"
+          }
+        },
+        {
+          "Name": "isFlashlightOn",
+          "Enabled": true,
+          "ReplicationMode": 1,
+          "Priority": 1,
+          "PropertyType": {
+            "$type": "Bolt.Compiler.PropertyTypeBool, bolt.compiler"
           },
           "AssetSettings": {
             "$type": "Bolt.Compiler.PropertyCommandSettings, bolt.compiler"
