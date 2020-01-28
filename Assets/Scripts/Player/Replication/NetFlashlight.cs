@@ -62,16 +62,4 @@ public class NetFlashlight : Bolt.EntityBehaviour<ICustomPlayerState>
     //    }
     //}
 
-
-    private void OnTriggerStay(Collider other)
-    {
-        if(other.CompareTag("Ghost"))
-        {
-            NetMovement ghostMove = other.GetComponent<NetMovement>();
-            if (ghostMove != null)
-            {
-                ghostMove.FlashLightCollisionEffect();
-            }
-        }
-    }
 }
