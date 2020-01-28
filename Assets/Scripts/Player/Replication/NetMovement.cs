@@ -6,39 +6,69 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
 {
+    [Header("Player Attributes")]
+    private Rigidbody rb;
+    GameObject playerBody;
+    [SerializeField] float health = 100;
+    public bool isDead = false;
+
+    [Header("Movement Variables")]
     private float translationZ;
     private float translationX;
-
     float yaw;
     float pitch;
+    Vector3 forward;
+    Vector3 right;
+    public float moveSpeed = 5f;
 
-    bool isLightOn = false;
-
+    [Header("Mouse Settings")]
     const float mouseSensitivity = 1.0f;
     public float clampAngle = 80.0f;
 
-    public bool isDead = false;
-
+    [Header("Light stuff")]
     public Light flashLightObject;
-    float lightTimer = 0.0f;
+    public GameObject lightCollider;
+    bool isLightOn = false;
 
-    private Rigidbody rb;
-    GameObject playerBody;
-    PlayerJoined playerJoined;
-    Vector3 forward;
-    Vector3 right;
+    private void Update()
+    {
+        //if (entity.HasControl)
+        //    PollKeys(true);
 
-    [Header("Player Attributes")]
-    public float moveSpeed = 5f;
+        forward = playerBody.transform.right;
+        right = playerBody.transform.forward;
+
+        if (entity.HasControl)
+        {
+            if (health <= 0)
+            {
+                Die();
+            }
+        }
+
+        //if(playerJoined.batteryChargeSlider != null)
+        //    playerJoined.batteryChargeSlider.value = flashlight.batterySize;
+
+        //This was to fix up and down movement of camera but doesnt work smoothly
+        //should not getcomponent in update
+        //playerCam = playerBody.GetComponentInChildren<Camera>();
+        //if (playerCam != null)
+        //{
+        //    playerCam.transform.rotation = Quaternion.Euler(pitch, yaw, 0);
+        //}
+    }
 
     public override void Attached()
     {
         state.SetTransforms(state.PlayerTransform, transform);
         rb = GetComponent<Rigidbody>();
-        playerJoined = GetComponent<PlayerJoined>();
         playerBody = transform.gameObject;
+
+        flashLightObject.enabled = false;
+        lightCollider.SetActive(false);
     }
 
+    //This checks for local inputs
     void PollKeys(bool mouse)
     {
         if(!isDead)
@@ -67,26 +97,7 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
         }
     }
 
-    private void Update()
-    {
-        //if (entity.HasControl)
-        //    PollKeys(true);
-
-        forward = playerBody.transform.right;
-        right = playerBody.transform.forward;
-
-        //if(playerJoined.batteryChargeSlider != null)
-        //    playerJoined.batteryChargeSlider.value = flashlight.batterySize;
-
-        //This was to fix up and down movement of camera but doesnt work smoothly
-        //should not getcomponent in update
-        //playerCam = playerBody.GetComponentInChildren<Camera>();
-        //if (playerCam != null)
-        //{
-        //    playerCam.transform.rotation = Quaternion.Euler(pitch, yaw, 0);
-        //}
-    }
-
+    //This checks for local inputs on the server
     public override void SimulateController()
     {
         if(entity.HasControl)
@@ -112,19 +123,13 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
         {
             //if player is non synced send him back to old location
             GoBack(cmd.Result.PlayerPosition, cmd.Result.PlayerRotation);
-            if (flashLightObject != null)
-            {
-                HandleFlashLight(cmd.Result.isFlashlightOn);
-            }
+            HandleFlashLight(cmd.Result.isFlashlightOn);
         }
         else
         {
             //send move from server to player
             Move(cmd.Input.TranslationX, cmd.Input.TranslationZ, cmd.Input.PlayerPosition, cmd.Input.Yaw, cmd.Input.Pitch);
-            if(flashLightObject != null)
-            {
-                HandleFlashLight(cmd.Input.isFlashlightOn);
-            }
+            HandleFlashLight(cmd.Input.isFlashlightOn);
 
             //set synced variables to player variables
             cmd.Result.PlayerPosition = gameObject.transform.position;
@@ -184,13 +189,27 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
 
     public void HandleFlashLight(bool isOn)
     {
-        if(isOn)
+        if(flashLightObject != null && lightCollider != null)
         {
-            flashLightObject.enabled = true;
+            if(isOn)
+            {
+                flashLightObject.enabled = true;
+                lightCollider.SetActive(true);
+            }
+            else
+            {
+                flashLightObject.enabled = false;
+                lightCollider.SetActive(false);
+            }
         }
-        else
+    }
+
+    public void FlashLightCollisionEffect()
+    {
+        //what happens if a ghost enters the 
+        if(gameObject.CompareTag("Ghost"))
         {
-            flashLightObject.enabled = false;
+            health -= Time.deltaTime * 2.0f;
         }
     }
 
@@ -198,13 +217,45 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         if(other.gameObject != this.gameObject)
         {
-            if(other.CompareTag("Ghost"))
+            if(gameObject.CompareTag("Ghost"))
             {
-                Die();
+                if(other.CompareTag("Player"))
+                {
+                    NetMovement playerMove = other.GetComponent<NetMovement>();
+                    if (playerMove != null)
+                    {
+                        playerMove.Die();
+                    }
+                }
             }
-            else if(other.CompareTag("Player"))
+            else if(gameObject.CompareTag("Player"))
             {
-                Revived();
+                if (other.CompareTag("Player"))
+                {
+                    NetMovement playerMove = other.GetComponent<NetMovement>();
+                    if (playerMove != null)
+                    {
+                        playerMove.Revived();
+                    }
+                }
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject != this.gameObject)
+        {
+            if (gameObject.CompareTag("Flashlight"))
+            {
+                if(other.CompareTag("Ghost"))
+                {
+                    NetMovement ghostMove = other.GetComponent<NetMovement>();
+                    if(ghostMove != null)
+                    {
+                        ghostMove.FlashLightCollisionEffect();
+                    }
+                }
             }
         }
     }

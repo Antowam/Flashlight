@@ -3,16 +3,16 @@ using Bolt;
 
 public class NetFlashlight : Bolt.EntityBehaviour<ICustomPlayerState>
 {
-    public Light flashLight;
-    private bool isLightOn;
-    public int batterySize = 100;
+    //public Light flashLight;
+    //private bool isLightOn;
+    //public int batterySize = 100;
 
-    public override void Attached()
-    {
-        flashLight.enabled = false;
-        flashLight.intensity = 2f;
-        flashLight.spotAngle = 65f;
-    }
+    //public override void Attached()
+    //{
+    //    flashLight.enabled = false;
+    //    flashLight.intensity = 2f;
+    //    flashLight.spotAngle = 65f;
+    //}
 
     //void PollKeys()
     //{
@@ -50,15 +50,28 @@ public class NetFlashlight : Bolt.EntityBehaviour<ICustomPlayerState>
     //    }
     //}
 
-    public void HandleFlashLight(bool isOn)
+    //public void HandleFlashLight(bool isOn)
+    //{
+    //    if(isOn)
+    //    {
+    //        flashLight.enabled = true;
+    //    }
+    //    else
+    //    {
+    //        flashLight.enabled = false;
+    //    }
+    //}
+
+
+    private void OnTriggerStay(Collider other)
     {
-        if(isOn)
+        if(other.CompareTag("Ghost"))
         {
-            flashLight.enabled = true;
-        }
-        else
-        {
-            flashLight.enabled = false;
+            NetMovement ghostMove = other.GetComponent<NetMovement>();
+            if (ghostMove != null)
+            {
+                ghostMove.FlashLightCollisionEffect();
+            }
         }
     }
 }

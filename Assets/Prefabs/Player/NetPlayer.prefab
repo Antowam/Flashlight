@@ -626,10 +626,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e059114984e4ee4daa068e43cc83691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clampAngle: 80
+  health: 100
   isDead: 0
-  flashLightObject: {fileID: 1746119846793123882}
   moveSpeed: 5
+  clampAngle: 80
+  flashLightObject: {fileID: 1746119846793123882}
+  lightCollider: {fileID: 8920232258456201508}
 --- !u!114 &3150492518941500523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -642,8 +644,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94137a95312d6e948b4be5bfe09b19c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashLight: {fileID: 1746119846793123882}
-  batterySize: 100
 --- !u!114 &7630510426150531796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1573,6 +1573,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 3613567641014311022, guid: 1db50f1fc897c114fac0f5b3493bfa32, type: 3}
+--- !u!114 &713156638656629087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8920232258456201508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94137a95312d6e948b4be5bfe09b19c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &642584196879773741
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1584,6 +1596,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FlashLightCollider
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 1db50f1fc897c114fac0f5b3493bfa32,
+        type: 3}
+      propertyPath: m_TagString
+      value: Flashlight
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 1db50f1fc897c114fac0f5b3493bfa32,
         type: 3}
