@@ -11,6 +11,8 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
     GameObject playerBody;
     [SerializeField] float health = 100;
     public bool isDead = false;
+    [SerializeField] Slider HealthBar;
+    [SerializeField] Slider BatteryBar;
 
     [Header("Movement Variables")]
     private float translationZ;
@@ -29,12 +31,12 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
     public Light flashLightObject;
     public GameObject lightCollider;
     bool isLightOn = false;
+    float currentBatteryCharge = 100;
+    [Tooltip("Drain amount for the flashlight battery")]
+    public float drainAmount = 1.0f;
 
     private void Update()
     {
-        //if (entity.HasControl)
-        //    PollKeys(true);
-
         forward = playerBody.transform.right;
         right = playerBody.transform.forward;
 
@@ -46,8 +48,16 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
             }
         }
 
-        //if(playerJoined.batteryChargeSlider != null)
-        //    playerJoined.batteryChargeSlider.value = flashlight.batterySize;
+        if (isLightOn)
+            DrainBattery(drainAmount);
+
+        //Healthbar is for the ghost
+        if (HealthBar != null)
+            HealthBar.value = health;
+
+        //batterybar is for the players
+        if (BatteryBar != null)
+            BatteryBar.value = currentBatteryCharge;
 
         //This was to fix up and down movement of camera but doesnt work smoothly
         //should not getcomponent in update
@@ -190,7 +200,7 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
         }
     }
 
-    public void HandleFlashLight(bool isOn)
+    void HandleFlashLight(bool isOn)
     {
         if(flashLightObject != null && lightCollider != null)
         {
@@ -207,7 +217,20 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
         }
     }
 
-    public void FlashLightCollisionEffect()
+    void DrainBattery(float drainValue)
+    {
+        currentBatteryCharge -= drainValue * Time.deltaTime;
+        if (currentBatteryCharge < 35)
+        {
+            
+        }
+        if (currentBatteryCharge <= 0)
+        {
+            HandleFlashLight(false);
+        }
+    }
+
+    void FlashLightCollisionEffect()
     {
         //what happens if a ghost enters the 
         if(gameObject.CompareTag("Ghost"))

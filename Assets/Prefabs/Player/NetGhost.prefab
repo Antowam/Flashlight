@@ -332,9 +332,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 1
+  m_MaxValue: 100
+  m_WholeNumbers: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1076,10 +1076,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   isDead: 0
+  HealthBar: {fileID: 3377680450518621592}
+  BatteryBar: {fileID: 0}
   moveSpeed: 3
   clampAngle: 80
   flashLightObject: {fileID: 0}
   lightCollider: {fileID: 0}
+  drainAmount: 1
 --- !u!114 &807408143814912194
 MonoBehaviour:
   m_ObjectHideFlags: 0

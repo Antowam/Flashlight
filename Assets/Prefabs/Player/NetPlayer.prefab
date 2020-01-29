@@ -628,6 +628,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   isDead: 0
+  HealthBar: {fileID: 0}
+  BatteryBar: {fileID: 6862751172771521776}
   moveSpeed: 5
   clampAngle: 80
   flashLightObject: {fileID: 1746119846793123882}
