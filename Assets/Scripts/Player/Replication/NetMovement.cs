@@ -64,8 +64,11 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
         rb = GetComponent<Rigidbody>();
         playerBody = transform.gameObject;
 
-        flashLightObject.enabled = false;
-        lightCollider.SetActive(false);
+        if(flashLightObject != null && lightCollider != null)
+        {
+            flashLightObject.enabled = false;
+            lightCollider.SetActive(false);
+        }
     }
 
     //This checks for local inputs
@@ -244,17 +247,13 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject != this.gameObject)
+        if(other.gameObject != this.gameObject)
         {
-            if (gameObject.CompareTag("Flashlight"))
+            if(gameObject.CompareTag("Ghost"))
             {
-                if(other.CompareTag("Ghost"))
+                if(other.gameObject.CompareTag("Flashlight"))
                 {
-                    NetMovement ghostMove = other.GetComponent<NetMovement>();
-                    if(ghostMove != null)
-                    {
-                        ghostMove.FlashLightCollisionEffect();
-                    }
+                    FlashLightCollisionEffect();
                 }
             }
         }
