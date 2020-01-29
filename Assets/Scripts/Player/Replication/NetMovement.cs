@@ -48,9 +48,6 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
             }
         }
 
-        if (isLightOn)
-            DrainBattery(drainAmount);
-
         //Healthbar is for the ghost
         if (HealthBar != null)
             HealthBar.value = health;
@@ -115,6 +112,9 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
     {
         if(entity.HasControl)
             PollKeys(true);
+
+        if (isLightOn && currentBatteryCharge >= 0)
+            DrainBattery(drainAmount);
 
         ICustomPlayerCommandInput input = CustomPlayerCommand.Create();
         
@@ -220,10 +220,6 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
     void DrainBattery(float drainValue)
     {
         currentBatteryCharge -= drainValue * Time.deltaTime;
-        if (currentBatteryCharge < 35)
-        {
-            
-        }
         if (currentBatteryCharge <= 0)
         {
             HandleFlashLight(false);
