@@ -8,6 +8,7 @@ TagManager:
   - Ghost
   - Battery
   - Flashlight
+  - TimerTextObject
   layers:
   - Default
   - TransparentFX

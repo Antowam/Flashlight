@@ -2,6 +2,7 @@
 using Bolt;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [RequireComponent(typeof(Rigidbody))]
 public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
@@ -35,6 +36,13 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
     [Tooltip("Drain amount for the flashlight battery")]
     public float drainAmount = 1.0f;
 
+    [Header("GameTime")]
+    public float gameTime = 0.0f;
+    public TextMeshProUGUI gameTimerText;
+
+    public GameObject endGameHUD;
+    public TextMeshProUGUI whoWonText;
+
     private void Update()
     {
         forward = playerBody.transform.right;
@@ -63,6 +71,9 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
         //{
         //    playerCam.transform.rotation = Quaternion.Euler(pitch, yaw, 0);
         //}
+
+        gameTime = GameManager.GetInstance().state.GameTimer;
+        gameTimerText.text = gameTime.ToString("F2");
     }
 
     public override void Attached()
@@ -186,17 +197,18 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
         isDead = true;
         if (isDead == true)
         {
-            Debug.Log("YOU DIED, do cool stuff here");
             //Stop the players movement
             rb.velocity = Vector3.zero;
+            GameManager.GetInstance().CheckWhosAlive();
         }
     }
 
     void Revived()
     {
-        if(isDead == true)
+        if(state.IsDead == true)
         {
             isDead = false;
+            state.IsDead = isDead;
         }
     }
 
@@ -233,6 +245,12 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
         {
             health -= Time.deltaTime * 2.0f;
         }
+    }
+
+    public void EnableEndGameHUD(string whoWon)
+    {
+        whoWonText.text = whoWon;
+        endGameHUD.SetActive(true);
     }
 
     private void OnTriggerEnter(Collider other)
