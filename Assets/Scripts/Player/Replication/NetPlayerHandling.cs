@@ -35,14 +35,19 @@ public class NetPlayerHandling
             {
                 BoltNetwork.Instantiate(BoltPrefabs.GameManager, new Vector3(0, 0, 0), Quaternion.identity);
                 character = BoltNetwork.Instantiate(BoltPrefabs.NetGhost, spawnPos, Quaternion.identity);
-                GameManager.GetInstance().AddPlayer(character);
                 character.TakeControl();
+                var playerJoinedEvent = PlayerJoinedEvent.Create();
+                playerJoinedEvent.PlayerThatJoined = character;
+                playerJoinedEvent.Send();
             }
             else
             {
                 character = BoltNetwork.Instantiate(BoltPrefabs.NetPlayer, spawnPos, Quaternion.identity);
-                GameManager.GetInstance().AddPlayer(character);
                 character.AssignControl(connection);
+                var playerJoinedEvent = PlayerJoinedEvent.Create();
+                playerJoinedEvent.PlayerThatJoined = character;
+                playerJoinedEvent.Send();
+                GameManager.GetInstance().OnPlayerJoined(character);
             }
         }
         character.transform.position = spawnPos;

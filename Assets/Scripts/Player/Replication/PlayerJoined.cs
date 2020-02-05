@@ -43,9 +43,12 @@ public class PlayerJoined : Bolt.EntityBehaviour<ICustomPlayerState>
 
     private void Update()
     {
-        if (entity.HasControl && entityCamera.gameObject.activeInHierarchy == false)
+        if (entity.HasControl)
         {
-            entityCamera.gameObject.SetActive(true);
+            if(entityCamera.gameObject.activeInHierarchy == false)
+            {
+                entityCamera.gameObject.SetActive(true);
+            }
             if(playerHUD != null)
             {
                 playerHUD.gameObject.SetActive(true);
@@ -54,7 +57,6 @@ public class PlayerJoined : Bolt.EntityBehaviour<ICustomPlayerState>
                     batteryChargeSlider = GetComponentInChildren<Slider>();
                 }
             }
-
         }
     }
 

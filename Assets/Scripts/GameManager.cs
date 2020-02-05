@@ -22,6 +22,9 @@ public class GameManager : Bolt.EntityBehaviour<ICustomGameManagerState>
     float gameTimer = 0.0f;
     public float gameStartTime = 60.0f;
 
+    public List<bool> deadPlayerList = new List<bool>();
+    public bool isGhostDead = false;
+
     private void Awake()
     {
         instance = this;
@@ -36,60 +39,59 @@ public class GameManager : Bolt.EntityBehaviour<ICustomGameManagerState>
             {
                 state.PlayerList[i] = null;
             }
+
             state.GameTimer = gameTimer;
         }
-        StartCoroutine(GameTimer());
+        //StartCoroutine(GameTimer());
     }
 
     public override void SimulateOwner()
     {
         if(gameStarted && entity.IsOwner)
         {
-            gameTimer -= Time.deltaTime;
-            state.GameTimer = gameTimer;
+            //gameTimer -= Time.deltaTime;
+            //state.GameTimer = gameTimer;
         }
     }
 
-    public void AddPlayer(BoltEntity playerObject)
+    public void OnPlayerJoined(BoltEntity playerObject)
     {
+        Debug.LogWarning(playerObject);
         if(playerObject.CompareTag("Ghost"))
         {
             state.GhostPlayer = playerObject;
-            Debug.Log(state.GhostPlayer);
+            isGhostDead = false;
         }
         else if(playerObject.CompareTag("Player"))
         {
             state.PlayerList[state.PlayerIndex] = playerObject;
-            Debug.Log(state.PlayerList[state.PlayerIndex]);
             state.PlayerIndex++;
+            deadPlayerList.Add(false);
         }
     }
 
-    bool CheckPlayersDead()
+    bool ArePlayersDead()
     {
-        for (int i = 0; i < state.PlayerList.Length; i++)
+        for (int i = 0; i < deadPlayerList.Count; i++)
         {
-            if(state.PlayerList[i].gameObject.GetComponentInChildren<NetMovement>().isDead)
+            if(deadPlayerList[i] == false)
             {
-                return true;
+                return false;
             }
         }
 
-        //If no players are alive return false
-        return false;
+        //If no players are alive return true
+        return true;
     }
 
     bool CheckGhostDead()
     {
-        if(!state.GhostPlayer.GetComponentInChildren<NetMovement>().isDead)
-            return false;
-
-        return true;
+        return isGhostDead;
     }
 
     public void CheckWhosAlive()
     {
-        if(!CheckPlayersDead())
+        if(ArePlayersDead())
         {
             gameState = GameState.PlayersDead;
         }
@@ -103,6 +105,23 @@ public class GameManager : Bolt.EntityBehaviour<ICustomGameManagerState>
         CheckGameState();
     }
 
+    public void KillPlayer(string networkID)
+    {
+        for (int i = 0; i < deadPlayerList.Count; i++)
+        {
+            if(networkID == state.PlayerList[i].NetworkId.ToString())
+            {
+                deadPlayerList[i] = true;
+            }
+            else if(networkID == state.GhostPlayer.NetworkId.ToString())
+            {
+                isGhostDead = true;
+            }
+        }
+
+        CheckWhosAlive();
+    }
+
     public void CheckGameState()
     {
         switch(gameState)
@@ -110,12 +129,12 @@ public class GameManager : Bolt.EntityBehaviour<ICustomGameManagerState>
             case GameState.None:
                 break;
             case GameState.PlayersDead:
-                Debug.Log("Players Died");
-                EnablePlayersHUD("Players Won");
+                Debug.LogWarning("Players Died");
+                EnablePlayersHUD("Ghost Won");
                 break;
             case GameState.GhostDead:
-                Debug.Log("Ghost Died");
-                EnablePlayersHUD("Ghost Won");
+                Debug.LogWarning("Ghost Died");
+                EnablePlayersHUD("Players Won");
                 break;
             case GameState.TimeOut:
                 EnablePlayersHUD("Players Won");
@@ -136,6 +155,9 @@ public class GameManager : Bolt.EntityBehaviour<ICustomGameManagerState>
     {
         for (int i = 0; i < state.PlayerList.Length; i++)
         {
+            if (state.PlayerList[i] == null)
+                continue;
+
             if(state.PlayerList[i].gameObject.GetComponentInChildren<NetMovement>() != null)
             {
                 state.PlayerList[i].gameObject.GetComponentInChildren<NetMovement>().EnableEndGameHUD(whoWon);

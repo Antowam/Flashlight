@@ -48,14 +48,6 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
         forward = playerBody.transform.right;
         right = playerBody.transform.forward;
 
-        if (entity.HasControl)
-        {
-            if (health <= 0)
-            {
-                Die();
-            }
-        }
-
         //Healthbar is for the ghost
         if (HealthBar != null)
             HealthBar.value = health;
@@ -112,7 +104,7 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
             pitch = Mathf.Clamp(pitch, -85f, +85f);
         }
 
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(1))
+        if (!isDead && Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(1))
         {
             isLightOn = !isLightOn;
         }
@@ -194,21 +186,27 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
 
     void Die()
     {
+        //Set local isdead to true //This works
         isDead = true;
-        if (isDead == true)
-        {
-            //Stop the players movement
-            rb.velocity = Vector3.zero;
-            GameManager.GetInstance().CheckWhosAlive();
-        }
+
+        var dieEvent = PlayerDiedEvent.Create();
+        dieEvent.IsDead = isDead;
+        dieEvent.PlayerWhoDied = entity.NetworkId.ToString();
+        dieEvent.Send();
+
+        //Stop the players movement
+        rb.velocity = Vector3.zero;
     }
 
     void Revived()
     {
-        if(state.IsDead == true)
+        if (isDead == true)
         {
             isDead = false;
-            state.IsDead = isDead;
+            var dieEvent = PlayerDiedEvent.Create();
+            dieEvent.IsDead = isDead;
+            dieEvent.PlayerWhoDied = entity.NetworkId.ToString();
+            dieEvent.Send();
         }
     }
 
@@ -244,6 +242,10 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
         if(gameObject.CompareTag("Ghost"))
         {
             health -= Time.deltaTime * 2.0f;
+            if(health <= 0)
+            {
+                Die();
+            }
         }
     }
 
