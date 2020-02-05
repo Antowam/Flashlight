@@ -5,6 +5,7 @@ public class SpawnPickup : MonoBehaviour
 {
     public List<Transform> spawnPoints;
     public GameObject spawnObj;
+    public Flashlight Player;
 
 
     private void Awake()

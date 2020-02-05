@@ -3,27 +3,34 @@
 [RequireComponent(typeof(SphereCollider))]
 public class Battery : MonoBehaviour
 {
-    public GameObject player;
-    public Flashlight flashLight;
+    public Flashlight Player;
+    public NetMovement netPlayer;
     SphereCollider sphereCollider;
     public float batteryCharge = 10f;
 
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        flashLight = player.GetComponent<Flashlight>();
-
+        Player = FindObjectOfType<Flashlight>();
         sphereCollider = GetComponent<SphereCollider>();
         sphereCollider.isTrigger = true;
     }
 
-    private void Update()
-    {
-
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("asdasdasd");
+        AddBatteryCharge(batteryCharge);
+        Destroy(gameObject);
+    }
+
+    void AddBatteryCharge(float batteryCharge)
+    {
+        if(Player.currentBattery < Player.maxBattery)
+        {
+            Player.currentBattery += Mathf.Clamp(batteryCharge, 0f, Player.maxBattery);
+        }
+
+        if(Player.currentBattery > Player.maxBattery)
+        {
+            Player.currentBattery = Player.maxBattery;
+        }
     }
 }
