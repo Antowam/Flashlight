@@ -46,3 +46,4 @@ MonoBehaviour:
   spawnPoints: []
   spawnObj: {fileID: 6667790736157729350, guid: 460209fc85ef0e94fbaf8e4f8a53266b,
     type: 3}
+  Player: {fileID: 3250793601723869314, guid: 2ef28dcb90584da4ba119e784380fa81, type: 3}

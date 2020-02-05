@@ -105,6 +105,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e51e98b350ee12d4e8cc72b28d2dfd6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  flashLight: {fileID: 0}
-  batteryCharge: 0
+  Player: {fileID: 0}
+  batteryCharge: 5

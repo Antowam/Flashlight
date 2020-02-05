@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 4225421539282919349}
   m_Layer: 0
   m_Name: NetBattery
-  m_TagString: Untagged
+  m_TagString: Battery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
