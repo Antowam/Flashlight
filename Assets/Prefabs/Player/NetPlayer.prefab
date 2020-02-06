@@ -463,7 +463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sceneGuid: 
   _serializerGuid: 76a21f50-f1d8-49cd-8f89-fd8dd052d983
-  _prefabId: 16
+  _prefabId: 17
   _updateRate: 1
   _autoFreezeProxyFrames: 0
   _clientPredicted: 1
@@ -866,6 +866,7 @@ MonoBehaviour:
   clampAngle: 80
   flashLightObject: {fileID: 1746119846793123882}
   lightCollider: {fileID: 8920232258456201508}
+  currentBatteryCharge: 100
   drainAmount: 3
   gameTime: 0
   gameTimerText: {fileID: 1532920647300442445}

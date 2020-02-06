@@ -32,7 +32,7 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
     public Light flashLightObject;
     public GameObject lightCollider;
     bool isLightOn = false;
-    float currentBatteryCharge = 100;
+    public float currentBatteryCharge = 100f;
     [Tooltip("Drain amount for the flashlight battery")]
     public float drainAmount = 1.0f;
 

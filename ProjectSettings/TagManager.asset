@@ -9,6 +9,7 @@ TagManager:
   - Battery
   - Flashlight
   - TimerTextObject
+  - BatterySpawnPoint
   layers:
   - Default
   - TransparentFX
