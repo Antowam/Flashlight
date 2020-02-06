@@ -799,7 +799,7 @@ GameObject:
   - component: {fileID: 3150492518941500523}
   - component: {fileID: 7630510426150531796}
   - component: {fileID: 1780734946415399529}
-  - component: {fileID: 6809721817502171839}
+  - component: {fileID: 4273351170484339369}
   - component: {fileID: 2302683892410996527}
   - component: {fileID: 4946820115866171161}
   m_Layer: 0
@@ -860,6 +860,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   isDead: 0
+  entityCamera: {fileID: 2669293990659561251}
+  playerHUD: {fileID: 6604829736106378126}
   HealthBar: {fileID: 0}
   BatteryBar: {fileID: 6862751172771521776}
   moveSpeed: 3
@@ -912,7 +914,7 @@ MonoBehaviour:
   minIntensity: 1.5
   maxIntensity: 4
   smoothing: 10
---- !u!114 &6809721817502171839
+--- !u!114 &4273351170484339369
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -921,12 +923,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2896237378622419219}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfebac2c28eea814794ef343b4a8eb20, type: 3}
+  m_Script: {fileID: 11500000, guid: e46f7e24575fe7741885026f4cd45ab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entityCamera: {fileID: 2669293990659561251}
-  playerHUD: {fileID: 6869141564909856412}
-  batteryChargeSlider: {fileID: 0}
 --- !u!136 &2302683892410996527
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1481,7 +1480,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1540,7 +1539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5626468347476943587
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1811,16 +1810,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3306619717252520111}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 1db50f1fc897c114fac0f5b3493bfa32,
-        type: 3}
-      propertyPath: m_Name
-      value: FlashLightCollider
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 1db50f1fc897c114fac0f5b3493bfa32,
-        type: 3}
-      propertyPath: m_TagString
-      value: Flashlight
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 1db50f1fc897c114fac0f5b3493bfa32,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1890,6 +1879,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 3.6614
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 1db50f1fc897c114fac0f5b3493bfa32,
+        type: 3}
+      propertyPath: m_Name
+      value: FlashLightCollider
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 1db50f1fc897c114fac0f5b3493bfa32,
+        type: 3}
+      propertyPath: m_TagString
+      value: Flashlight
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 1db50f1fc897c114fac0f5b3493bfa32,
         type: 3}

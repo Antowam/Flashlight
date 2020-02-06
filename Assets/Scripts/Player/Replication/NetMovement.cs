@@ -12,6 +12,8 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
     GameObject playerBody;
     [SerializeField] float health = 100;
     public bool isDead = false;
+    [SerializeField] Camera entityCamera;
+    [SerializeField] GameObject playerHUD;
     [SerializeField] Slider HealthBar;
     [SerializeField] Slider BatteryBar;
 
@@ -247,6 +249,20 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
                 Die();
             }
         }
+    }
+
+    public void EnablePlayerCamera()
+    {
+        if(entityCamera.gameObject.activeInHierarchy == false)
+            entityCamera.gameObject.SetActive(true);
+    }
+
+    public void SetPlayerHUD(bool isHUDOn)
+    {
+        if(isHUDOn)
+            playerHUD.SetActive(true);
+        else
+            playerHUD.SetActive(false);
     }
 
     public void EnableEndGameHUD(string whoWon)
