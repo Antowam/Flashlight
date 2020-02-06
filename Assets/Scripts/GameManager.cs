@@ -42,15 +42,15 @@ public class GameManager : Bolt.EntityBehaviour<ICustomGameManagerState>
 
             state.GameTimer = gameTimer;
         }
-        //StartCoroutine(GameTimer());
+        StartCoroutine(GameTimer());
     }
 
     public override void SimulateOwner()
     {
         if(gameStarted && entity.IsOwner)
         {
-            //gameTimer -= Time.deltaTime;
-            //state.GameTimer = gameTimer;
+            gameTimer -= Time.deltaTime;
+            state.GameTimer = gameTimer;
         }
     }
 

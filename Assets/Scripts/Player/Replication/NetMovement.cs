@@ -10,6 +10,7 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
     [Header("Player Attributes")]
     private Rigidbody rb;
     GameObject playerBody;
+    float maxHealth = 100;
     [SerializeField] float health = 100;
     public bool isDead = false;
     [SerializeField] Camera entityCamera;
@@ -34,6 +35,7 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
     public Light flashLightObject;
     public GameObject lightCollider;
     bool isLightOn = false;
+    float maxBatteryCharge = 100.0f;
     public float currentBatteryCharge = 100f;
     [Tooltip("Drain amount for the flashlight battery")]
     public float drainAmount = 1.0f;
@@ -52,11 +54,11 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
 
         //Healthbar is for the ghost
         if (HealthBar != null)
-            HealthBar.value = health;
+            HealthBar.value = health / maxHealth;
 
         //batterybar is for the players
         if (BatteryBar != null)
-            BatteryBar.value = currentBatteryCharge;
+            BatteryBar.value = currentBatteryCharge / maxBatteryCharge;
 
         //This was to fix up and down movement of camera but doesnt work smoothly
         //should not getcomponent in update
