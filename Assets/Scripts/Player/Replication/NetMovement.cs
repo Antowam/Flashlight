@@ -77,12 +77,6 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
         state.SetTransforms(state.PlayerTransform, transform);
         rb = GetComponent<Rigidbody>();
         playerBody = transform.gameObject;
-
-        if(flashLightObject != null && lightCollider != null)
-        {
-            flashLightObject.enabled = false;
-            lightCollider.SetActive(false);
-        }
     }
 
     //This checks for local inputs
@@ -108,9 +102,18 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
             pitch = Mathf.Clamp(pitch, -85f, +85f);
         }
 
-        if (!isDead && Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(1))
+        if(!isDead && Input.GetKeyDown(KeyCode.E) && currentBatteryCharge > 0 || !isDead && Input.GetMouseButtonDown(1) && currentBatteryCharge > 0)
         {
             isLightOn = !isLightOn;
+
+            HandleFlashLight(isLightOn);
+
+            Debug.LogWarning("Local flashlight");
+
+            var flashlightEvent = OnFlashlightActivate.Create();
+            flashlightEvent.isFlashlightOn = isLightOn;
+            flashlightEvent.whoActivatedFlashlight = entity.NetworkId.ToString();
+            flashlightEvent.Send();
         }
     }
 
@@ -120,7 +123,7 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
         if(entity.HasControl)
             PollKeys(true);
 
-        if (isLightOn && currentBatteryCharge >= 0)
+        if(isLightOn)
             DrainBattery(drainAmount);
 
         ICustomPlayerCommandInput input = CustomPlayerCommand.Create();
@@ -130,7 +133,6 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
         input.TranslationZ = translationZ;
         input.Yaw = yaw;
         input.Pitch = pitch;
-        input.isFlashlightOn = isLightOn;
 
         entity.QueueInput(input);
     }
@@ -143,18 +145,15 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
         {
             //if player is non synced send him back to old location
             GoBack(cmd.Result.PlayerPosition, cmd.Result.PlayerRotation);
-            HandleFlashLight(cmd.Result.isFlashlightOn);
         }
         else
         {
             //send move from server to player
             Move(cmd.Input.TranslationX, cmd.Input.TranslationZ, cmd.Input.PlayerPosition, cmd.Input.Yaw, cmd.Input.Pitch);
-            HandleFlashLight(cmd.Input.isFlashlightOn);
 
             //set synced variables to player variables
             cmd.Result.PlayerPosition = gameObject.transform.position;
             cmd.Result.PlayerRotation = gameObject.transform.rotation;
-            cmd.Result.isFlashlightOn = isLightOn;
         }
     }
 
@@ -193,6 +192,11 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
         //Set local isdead to true //This works
         isDead = true;
 
+        var flashlightEvent = OnFlashlightActivate.Create();
+        flashlightEvent.isFlashlightOn = false;
+        flashlightEvent.whoActivatedFlashlight = entity.NetworkId.ToString();
+        flashlightEvent.Send();
+        
         var dieEvent = PlayerDiedEvent.Create();
         dieEvent.IsDead = isDead;
         dieEvent.PlayerWhoDied = entity.NetworkId.ToString();
@@ -214,7 +218,7 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
         }
     }
 
-    void HandleFlashLight(bool isOn)
+    public void HandleFlashLight(bool isOn)
     {
         if(flashLightObject != null && lightCollider != null)
         {
@@ -222,11 +226,13 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
             {
                 flashLightObject.enabled = true;
                 lightCollider.SetActive(true);
+                isLightOn = true;
             }
             else
             {
                 flashLightObject.enabled = false;
                 lightCollider.SetActive(false);
+                isLightOn = false;
             }
         }
     }
@@ -234,9 +240,13 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
     void DrainBattery(float drainValue)
     {
         currentBatteryCharge -= drainValue * Time.deltaTime;
+        //Debug.LogWarning(currentBatteryCharge);
         if (currentBatteryCharge <= 0)
         {
-            HandleFlashLight(false);
+            var flashlightEvent = OnFlashlightActivate.Create();
+            flashlightEvent.isFlashlightOn = false;
+            flashlightEvent.whoActivatedFlashlight = entity.NetworkId.ToString();
+            flashlightEvent.Send();
         }
     }
 

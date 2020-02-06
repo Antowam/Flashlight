@@ -3736,7 +3736,6 @@
         {
           "Name": "GhostPlayer",
           "Enabled": true,
-          "Expanded": true,
           "ReplicationMode": 1,
           "Priority": 1,
           "PropertyType": {
@@ -3753,7 +3752,6 @@
         {
           "Name": "GameTimer",
           "Enabled": true,
-          "Expanded": true,
           "ReplicationMode": 1,
           "Priority": 1,
           "PropertyType": {
@@ -3777,43 +3775,8 @@
           }
         },
         {
-          "Name": "GhostWon",
-          "Enabled": true,
-          "Expanded": true,
-          "ReplicationMode": 1,
-          "Priority": 1,
-          "PropertyType": {
-            "$type": "Bolt.Compiler.PropertyTypeBool, bolt.compiler"
-          },
-          "AssetSettings": {
-            "$type": "Bolt.Compiler.PropertyStateSettings, bolt.compiler",
-            "ExtrapolationErrorTolerance": 0.25,
-            "_ExtrapolationCorrectionFrames": 6,
-            "ExtrapolationMaxFrames": 9,
-            "SnapMagnitude": 10.0
-          }
-        },
-        {
-          "Name": "PlayersWon",
-          "Enabled": true,
-          "Expanded": true,
-          "ReplicationMode": 1,
-          "Priority": 1,
-          "PropertyType": {
-            "$type": "Bolt.Compiler.PropertyTypeBool, bolt.compiler"
-          },
-          "AssetSettings": {
-            "$type": "Bolt.Compiler.PropertyStateSettings, bolt.compiler",
-            "ExtrapolationErrorTolerance": 0.25,
-            "_ExtrapolationCorrectionFrames": 6,
-            "ExtrapolationMaxFrames": 9,
-            "SnapMagnitude": 10.0
-          }
-        },
-        {
           "Name": "PlayerIndex",
           "Enabled": true,
-          "Expanded": true,
           "ReplicationMode": 1,
           "Priority": 1,
           "PropertyType": {
@@ -3998,6 +3961,44 @@
       ],
       "Name": "EnablePlayerHUDEvent",
       "Guid": "bd305de2-d239-49c6-870e-5ab6b63f938f",
+      "Groups": [
+        "samples"
+      ]
+    },
+    {
+      "$type": "Bolt.Compiler.EventDefinition, bolt.compiler",
+      "Properties": [
+        {
+          "Name": "isFlashlightOn",
+          "Enabled": true,
+          "Expanded": true,
+          "ReplicationMode": 1,
+          "Priority": 1,
+          "PropertyType": {
+            "$type": "Bolt.Compiler.PropertyTypeBool, bolt.compiler"
+          },
+          "AssetSettings": {
+            "$type": "Bolt.Compiler.PropertyEventSettings, bolt.compiler"
+          }
+        },
+        {
+          "Name": "whoActivatedFlashlight",
+          "Enabled": true,
+          "Expanded": true,
+          "ReplicationMode": 1,
+          "Priority": 1,
+          "PropertyType": {
+            "$type": "Bolt.Compiler.PropertyTypeString, bolt.compiler",
+            "MaxLength": 1
+          },
+          "AssetSettings": {
+            "$type": "Bolt.Compiler.PropertyEventSettings, bolt.compiler"
+          }
+        }
+      ],
+      "EntitySenders": 3,
+      "Name": "OnFlashlightActivate",
+      "Guid": "8351dc0c-b41f-4998-bf0b-0bb17c2d3d49",
       "Groups": [
         "samples"
       ]

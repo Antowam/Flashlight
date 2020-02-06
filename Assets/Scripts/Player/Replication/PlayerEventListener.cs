@@ -10,4 +10,11 @@ public class PlayerEventListener : Bolt.GlobalEventListener
         gameObject.GetComponent<NetMovement>().SetPlayerHUD(true);
     }
 
+    public override void OnEvent(OnFlashlightActivate evnt)
+    {
+        Debug.LogWarning("DID YOU ACTIVATE FLASHLIGHT");
+        if (evnt.whoActivatedFlashlight == gameObject.GetComponent<NetMovement>().entity.NetworkId.ToString())
+            gameObject.GetComponent<NetMovement>().HandleFlashLight(evnt.isFlashlightOn);
+    }
+
 }
