@@ -253,16 +253,19 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
 
     public void EnablePlayerCamera()
     {
-        if(entityCamera.gameObject.activeInHierarchy == false)
+        if(entityCamera.gameObject.activeInHierarchy == false && entity.HasControl)
             entityCamera.gameObject.SetActive(true);
     }
 
     public void SetPlayerHUD(bool isHUDOn)
     {
-        if(isHUDOn)
-            playerHUD.SetActive(true);
-        else
-            playerHUD.SetActive(false);
+        if(entity.HasControl)
+        {
+            if(isHUDOn)
+                playerHUD.SetActive(true);
+            else
+                playerHUD.SetActive(false);
+        }
     }
 
     public void EnableEndGameHUD(string whoWon)

@@ -795,7 +795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e059114984e4ee4daa068e43cc83691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  health: 100
   isDead: 0
   entityCamera: {fileID: 2669293990659561251}
   playerHUD: {fileID: 5404591495470547563}
