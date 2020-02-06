@@ -47,7 +47,6 @@ public class NetPlayerHandling
                 var playerJoinedEvent = PlayerJoinedEvent.Create();
                 playerJoinedEvent.PlayerThatJoined = character;
                 playerJoinedEvent.Send();
-                GameManager.GetInstance().OnPlayerJoined(character);
             }
         }
         character.transform.position = spawnPos;
