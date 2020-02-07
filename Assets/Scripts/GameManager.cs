@@ -41,6 +41,7 @@ public class GameManager : Bolt.EntityBehaviour<ICustomGameManagerState>
             state.GameTimer = gameTimer;
         }
 
+        StartCoroutine(GameTimer());
         FindSpawnPoints();
     }
 
@@ -177,10 +178,10 @@ public class GameManager : Bolt.EntityBehaviour<ICustomGameManagerState>
 
     public void StartRound()
     {
-        UpdateConnections();
-        ReInitializeSpawnPoints();
-        UnassignControl();
-        AssignControl();
+        //UpdateConnections();
+        //ReInitializeSpawnPoints();
+        //UnassignControl();
+        //AssignControl();
         //SpawnPlayers();
         //gameStarted = true;
         //StartCoroutine(GameTimer());

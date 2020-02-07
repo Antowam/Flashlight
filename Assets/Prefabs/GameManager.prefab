@@ -74,5 +74,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameStarted: 0
-  gameStartTime: 20
+  gameStartTime: 60
   isGhostDead: 0
