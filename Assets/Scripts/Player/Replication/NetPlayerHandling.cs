@@ -52,6 +52,11 @@ public class NetPlayerHandling
         character.transform.position = spawnPos;
     }
 
+    public void AssignControl()
+    {
+        
+    }
+
     public bool IsServer
     {
         get { return connection == null; }

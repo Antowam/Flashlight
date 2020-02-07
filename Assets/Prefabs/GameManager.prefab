@@ -73,5 +73,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ef498ac9ce375d4f95e3a48a708b631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameStarted: 0
   gameStartTime: 20
   isGhostDead: 0

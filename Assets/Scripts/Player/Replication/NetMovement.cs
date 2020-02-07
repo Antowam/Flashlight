@@ -15,6 +15,8 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
     public bool isDead = false;
     [SerializeField] Camera entityCamera;
     [SerializeField] GameObject playerHUD;
+    [SerializeField] GameObject startGamePanel;
+    [SerializeField] TextMeshProUGUI amountOfPlayersText;
     [SerializeField] Slider HealthBar;
     [SerializeField] Slider BatteryBar;
 
@@ -70,6 +72,9 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
 
         gameTime = GameManager.GetInstance().state.GameTimer;
         gameTimerText.text = gameTime.ToString("F2");
+
+        if(amountOfPlayersText != null)
+            amountOfPlayersText.text = "Players: " + (GameManager.GetInstance().state.PlayerIndex + 1) + " / 4";
     }
 
     public override void Attached()
@@ -114,6 +119,11 @@ public class NetMovement : Bolt.EntityBehaviour<ICustomPlayerState>
             flashlightEvent.isFlashlightOn = isLightOn;
             flashlightEvent.whoActivatedFlashlight = entity.NetworkId.ToString();
             flashlightEvent.Send();
+        }
+
+        if(BoltNetwork.IsServer && !isDead && GameManager.GetInstance().gameStarted == false && Input.GetKeyDown(KeyCode.Space))
+        {
+            GameManager.GetInstance().StartRound();
         }
     }
 
